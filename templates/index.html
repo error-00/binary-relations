@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Main page</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Бінарне відношення</h1>
+    </header>
+    <form action="/names" method="GET">
+        <h2>Введіть кількість об'єктів</h2>
+        <p class="comm">Кількість має бути не менше 3 об'єктів</p>
+        <table>
+            <tr>
+                <td class="obj">Кількість об'єктів:</td>
+                <td><input type="number" id="n" name="n" min="3" width="60" required></td>
+            </tr>
+        </table>
+        <br>
+        <p><input value='Далі' type='SUBMIT' class="btn first"></p>
+        <!--    <input type="hidden" name="n" value="{{ n }}">-->
+    </form>
+</div>
+</body>
+</html>

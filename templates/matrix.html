@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Matrix Page</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Бінарне відношення</h1>
+    </header>
+    <form action="/result/" method="POST">
+        <h2>Заповніть матрицю попарних порівнянь</h2>
+        <p class="comm">Вводьте такі позначення:
+            <br><br>-1 - Об'єкт 1 краще за об'єкт 2
+            <br>1 - Об'єкт 1 гірше за об'єкт 2
+            <br>0 - Об'єкти однакові
+        </p>
+        <table>
+            <tr>
+                <th></th> <!-- Пуста комірка для симетрії -->
+                {% for name in names %}
+                <th>{{ name }}</th>
+                {% endfor %}
+            </tr>
+            {% for i in range(n) %}
+            <tr>
+                <th>{{ names[i] }}</th>
+                {% for j in range (n) %}
+                <td>
+                    {% if i < j %}
+                    <input type="text" name="matrix" id="matrix[{{i}}][{{j}}]" pattern="^-?([0-1]{1}|1)$" required>
+                    <!-- Можна вводити тільки 1, -1, 0-->
+                    {% elif i > j %}
+                    <input type="text" name="matrix" id="matrix[{{j}}][{{i}}]" value="" readonly>
+                    {% elif i == j %}
+                    <input type="text" name="matrix" id="matrix[{{i}}{{j}}]" value="0" readonly>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="hidden" name="n" value="{{ n }}">
+        {% for i in range(n) %}
+        <input type="hidden" name="names" value="{{ names[i] }}">
+        {% endfor %}
+        <br>
+        <p><input value='Далі' type='SUBMIT' class="btn first"></p>
+
+
+    </form>
+</div>
+</body>
+</html>
+

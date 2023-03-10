@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Result</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Бінарне відношення</h1>
+    </header>
+    <form method="POST">
+        <h2>Результат</h2>
+        <h3>МПП</h3>
+        <table class="table_res">
+            <thead>
+            <tr>
+                <th></th>
+                {% for name in names %}
+                <th>{{ name }}</th>
+                {% endfor %}
+                <th class="table_backg">SUM</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in range(n) %}
+            <tr>
+                <th>{{ names[i] }}</th>
+                {% for j in range(n) %}
+                <td>{{ matrix[i][j] }}</td>
+                {% endfor %}
+                <td class="table_backg">{{ sorted_dict[names[i]] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <br><br>
+        <h3>Порядок ранжування</h3>
+
+        <table class="table_res">
+            <thead>
+            <tr>
+                <th>Об'єкт</th>
+                <th>Сума</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for name, total in sorted_dict.items() %}
+            <tr class="table_col">
+                <td>{{ name }}</td>
+                <td>{{ total }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Ранжування з використанням відношень</h3>
+        <p class="res">{{ ranj_str }}</p>
+        <br><br>
+
+        <h3>Формальні позначки</h3>
+        <table class="table_res">
+            <thead>
+            <tr class="table_backg">
+                <th>Об'єкт</th>
+                <th>Формальна позначка</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in range(n) %}
+            <tr>
+                <td>{{ names[i] }}</td>
+                <td>a{{ i+1 }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+
+        <h3>ПЕРЕВІРКА НА ТРАНЗИТИВНІСТЬ</h3>
+        <table class="table_res">
+
+            <thead>
+            <tr class="tranz_table">
+                <th>№</th>
+                <th>Комбінація 3-х об’єктів</th>
+                <th>Умова транзитивності</th>
+                <th>Відношення</th>
+                <th>Примітка</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for i in range(len_comb) %}
+            <tr>
+                <th class="tranz_table">{{ i+1 }}</th>
+
+                <th class="comb">{{ comb[i] }}</th>
+
+                <th class="comb">{{ cond_tranz[i] }}</th>
+
+                <th>{{ vidnosh[i] }}</th>
+
+                {% if prim[i] == '+' %}
+                <th class="prim_pl">{{ prim[i] }}</th>
+                {% elif prim[i] == '-' %}
+                <th class="prim_minus">{{ prim[i] }}</th>
+                {% else %}
+                <th>{{ prim[i] }}</th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+        <br><br>
+
+        <h3>ВИСНОВОК</h3>
+        <p class="res res_visn">{{ visnovok }}</p>
+        <br><br><br>
+
+    </form>
+</div>
+</body>
+</html>
