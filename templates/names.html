@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Names</title>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Бінарне відношення</h1>
+    </header>
+    <form class="form" action="/matrix/" method="POST">
+        <h2>Введіть імена об'єктів</h2>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% else %}
+        <p class="comm">Будь ласка, вводьте різні назви об'єктів :)</p>
+        {% endif %}
+        <input type="hidden" name="n" value="{{ n }}">
+        <table>
+            {% for i in range(n) %}
+            <tr>
+                <td class="obj">Об'єкт №{{ i+1 }}:</td>
+                <td><input type="text" name="names" id="name_{{ i }}" required></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <p><input value='Далі' type='SUBMIT' class="btn first"></p>
+        <br>
+    </form>
+</div>
+</body>
+</html>
